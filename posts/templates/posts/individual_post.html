@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Post Page{% endblock %}
+{% block content %}
+
+<h2>Individual post:</h2>
+<ul>
+	{% for post in posts %}
+	{% if post.id == postid %}
+	<li>"{{ post.message }}" </br></br> - {{ post.account }} ({{ post.post_date }}) [{{ post.votes }}]
+	</br>
+	{% endif %}
+{% endfor %}
+</ul>
+{% endblock %}

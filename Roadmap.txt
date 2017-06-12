@@ -1,0 +1,8 @@
+- Voting System
+- Web Design
+- Contact Form
+- Account log-ins
+- Learn Bootstrap
+- Show only time for today's posts
+- Remove all duplicate code (i.e. CSS)
+- Next 30 on bottom of homepage

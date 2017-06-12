@@ -1,0 +1,18 @@
+<!-- Pipeline Project\pipeline\posts\templates\posts\search_form.html  -->
+
+{% extends "base.html" %}
+{% block title %}Pipeline Search{% endblock %}
+{% block content %}
+<h2>Search for a post:</h2>
+{% if errors %}
+<ul>
+    {% for error in errors %}
+    <li>{{ error }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<form action="/search/" method="get">
+    <input type="text" name="q">
+    <input type="submit" value="Search">
+</form>
+{% endblock %}

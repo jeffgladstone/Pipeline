@@ -1,0 +1,20 @@
+<!-- \posts\templates\posts\search_results.html -->
+
+{% extends "base.html" %}
+{% block title %}Pipeline Search{% endblock %}
+{% block content %}
+</br>
+<a href = "/search/">Search again?</a>   
+<p>You searched for: <strong>{{ query }}</strong></p>
+
+{% if posts %}           
+<p>Found {{ posts|length }} post{{ posts|pluralize }}.</p>
+<ul>               
+    {% for post in posts %}               
+    <li>"{{ post.message }}" - {{ post.account }} ({{ post.post_date }}) [{{ post.votes }}]</li>
+    {% endfor %}           
+</ul>       
+{% else %}
+<p>No posts matched your search criteria.</p>       
+{% endif %}
+{% endblock %}

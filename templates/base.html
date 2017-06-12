@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- \Pipeline Project\pipeline\templates\base.html -->
+
+<html lang = 'en'>
+<head>
+  <title>{% block title %} {% endblock %}</title>
+  <style type="text/css">
+      h1 {
+        color: darkgreen;
+        font-family: monospace;
+        font-size: 24px;
+    }
+    h2 {
+        font-family: monospace;
+        color: black;
+        font-size: 17px;
+        text-decoration: bold
+    }
+    ul, p {
+        font-family: monospace;
+        color: #333339;
+        font-size: 16px;
+    }
+    a {
+        font-family: monospace;
+        color: purple;
+        font-size: 16px;
+    }
+    body {
+        background-color: #DFFFFF;
+        display: block;
+        padding: 5px 25px;
+    }
+    
+</style>
+</head>
+<body>
+    {% load static %}
+    <a href = "/"><img src = "{% static 'pipeline/pipeline_title.png' %}" alt = "Pipeline Title" width = "275px" ></a>
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+    <hr>
+    <p>Thanks for using Pipeline! (2017)</p>
+    {% endblock %}
+</body>
+</html>
