@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 import datetime
 from posts.models import Post
+from django.contrib.auth import authenticate, login
 
 def sort_posts_recent():
     
@@ -20,7 +21,17 @@ def homepage(request):
 
     now = datetime.datetime.now()
     posts = sort_posts_recent()
-    return render(request, 'homepage.html', {'current_date': now, 'posts': posts})
+    if request.user.username:
+        username = request.user.username
+    else:
+        username = 'guest'
+    return render(request, 'homepage.html', {'current_date': now, 'posts': posts, 'username': username})
 
 def profile(request):
-    return render(request, 'profile.html')
+    return render(request, 'profile.html', {'user': request.user})
+
+def success(request):
+    return render(request, 'success.html')
+
+def about(request):
+    return render(request, 'about.html')

@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 from django.http import HttpResponse
-from posts.models import Post, Account
+from posts.models import Post
 import datetime
 
 from pipeline.views import sort_posts_recent
@@ -31,7 +31,7 @@ def add_post(request):
             Post.objects.create(
                 message = q,
                 post_date = now,
-                account = Account.objects.get(id = 4),  #Change ID number if database is wiped
+                user = request.user,
                 votes = 0
             )
             recentposts = sort_posts_recent()

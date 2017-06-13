@@ -11,7 +11,7 @@
 <p>Found {{ posts|length }} post{{ posts|pluralize }}.</p>
 <ul>               
     {% for post in posts %}               
-    <li>"{{ post.message }}" - {{ post.account }} ({{ post.post_date }}) [{{ post.votes }}]</li>
+	<li>"{{ post.message }}" - {{ post.user.username | capfirst }} ({{ post.post_date }}) [{{ post.votes }}]</li>
     {% endfor %}           
 </ul>       
 {% else %}

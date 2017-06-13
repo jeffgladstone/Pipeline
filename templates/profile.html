@@ -2,7 +2,16 @@
 {% block title %}Pipeline Profile{% endblock %}
 {% block content %}
 <h1>Profile</h1>
-<h2>COMING SOON!!</h2>
+<h2>
+    {% if user.username %}
+    </br>
+    <p>Name: {{ user.first_name | capfirst }} {{ user.last_name | capfirst }}</p>
+    <p>E-mail: {{ user.email }}</p>
+    <p>Date Joined: {{ user.date_joined }}</p>
+    <p>Last login: {{ user.last_login }}.</p>
+    {% else %}
+    <p>Please <a href = "/login/">login</a> to view your profile.</p>
+    {% endif %}
+</h2>
 </br>
-<p>(Meanwhile, go <a href = "/">back</a> and create more posts).</p>
 {% endblock %}

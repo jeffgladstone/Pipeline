@@ -6,7 +6,7 @@
 <ul>
 	{% for post in posts %}
 	{% if post.id == postid %}
-	<li>"{{ post.message }}" </br></br> - {{ post.account }} ({{ post.post_date }}) [{{ post.votes }}]
+	<li>"{{ post.message }}" - {{ post.user.username | capfirst }} ({{ post.post_date }}) [{{ post.votes }}]</li>
 	</br>
 	{% endif %}
 {% endfor %}

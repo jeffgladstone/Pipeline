@@ -1,8 +1,8 @@
-- Voting System
-- Web Design
-- Contact Form
-- Account log-ins
-- Learn Bootstrap
+- Comment through all code (block comments)
+- Profile page includes user info and lists user's posts
+- Work on web design
+- Sign up page
 - Show only time for today's posts
-- Remove all duplicate code (i.e. CSS)
 - Next 30 on bottom of homepage
+- Instead of just showing success page, look into redirecting... May be able to resolve url issue for addpost, etc...
+- Combine 'Search Posts' and 'Search Users'
