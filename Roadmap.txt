@@ -1,8 +1,14 @@
-- Comment through all code (block comments)
-- Profile page includes user info and lists user's posts
-- Work on web design
-- Sign up page
-- Show only time for today's posts
+Goals:
+- Fix all url errors
+- Sign up page for making an account
+- Sort posts by Top/Hottest (drop down menu)
 - Next 30 on bottom of homepage
-- Instead of just showing success page, look into redirecting... May be able to resolve url issue for addpost, etc...
-- Combine 'Search Posts' and 'Search Users'
+- Make votes a dictioary with user:1 or -1. integer represents upvote or downvote
+- Profile pic -- extra User field
+
+
+
+
+
+Notes:
+- Use 127.0.0.1:8000 for only this computer, but 192.168.1.14:8000 for other computers to connect (could change)

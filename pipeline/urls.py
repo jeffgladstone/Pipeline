@@ -24,8 +24,8 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'), #{'next_page': '/'} redirects home
     url(r'^$', homepage),
-    url(r'^profile$', profile),
-    url(r'^success$', success), #hasn't been used yet
-    url(r'^about$', about),
+    url(r'^profile/(?P<user_id>\d{1,3})/$', profile),
+    url(r'^success/$', success), #hasn't been used yet
+    url(r'^about/$', about),
     url(r'^', include('posts.urls')),
 ]

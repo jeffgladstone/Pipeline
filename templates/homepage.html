@@ -1,29 +1,29 @@
 {% extends "base.html" %}
 {% block title %}Pipeline Home{% endblock %}
 {% block content %}
-<p>Welcome {{ username | capfirst }}. It is now {{ current_date }}</p>
+<p><i>Welcome {{ first_name | capfirst }}. It is now {{ current_date }}</i></p>
 {% load static %}
 <a href = "addpost"><img src = "{% static 'pipeline/add_post.png' %}" alt = "Add Post" width = "130px" ></a>
-<a href = "search"><img src = "{% static 'pipeline/search_post.png' %}" alt = "Search Posts" width = "150px" ></a> &nbsp;
-<a href = "profile"><img src = "{% static 'pipeline/profile.png' %}" alt = "Profile" width = "95px" ></a> &nbsp;
+<a href = "search"><img src = "{% static 'pipeline/search_term.png' %}" alt = "Search" width = "100px" ></a> &nbsp;
+{% if user.username %}
+<a href = "profile/{{request.user.id}}"><img src = "{% static 'pipeline/profile.png' %}" alt = "Profile" width = "95px" ></a> &nbsp;
+{% else %}
+<a href = "profile/0"><img src = "{% static 'pipeline/profile.png' %}" alt = "Profile" width = "95px" ></a> &nbsp;
+{% endif %}
 {% if username == 'guest' %}
 <a href = "login"><img src = "{% static 'pipeline/login.png' %}" alt = "Login" width = "80px" ></a> &nbsp;
 {% endif %}
 {% if username != 'guest' %}
 <a href = "logout"><img src = "{% static 'pipeline/logout.png' %}" alt = "Logout" width = "95px" ></a> &nbsp;
 {% endif %}
-<a href = "about"><img src = "{% static 'pipeline/about.png' %}" alt = "About" width = "80px" ></a> &nbsp;&nbsp;&nbsp;
-<a href = "/"><img src = "{% static 'pipeline/search_user.png' %}" alt = "Search Users" width = "160px" ></a></br> <!-- Make this work! -->
+<a href = "about"><img src = "{% static 'pipeline/about.png' %}" alt = "About" width = "85px" ></a> &nbsp;&nbsp;&nbsp;
 </br>
 <a href = "delete">Delete today's posts?</a>
 </br>
 <h2>What's new?</h2>
 <ul>               
 	{% for post in posts %}               
-	<li>"{{ post.message }}" - {{ post.user.username | capfirst }} ({{ post.post_date }}) [{{ post.votes }}]</li>
-	<form action="/post/{{post.id}}/0" method="get">
-	<input type="submit" value="Go to post">
-</form>
+	<li><a href = "/post/{{post.id}}/0">"{{ post.message }}"</a> - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> {% if post.post_date.date == current_date.date %}(Today, {{ post.post_date.time }}){% else %}({{ post.post_date.date }}){% endif %} [{{ post.votes }}]</li>
 <form action="/post/{{post.id}}/1" method="get">
 	<input type="submit" value="Upvote">
 </form>

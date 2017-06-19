@@ -3,15 +3,31 @@
 {% block content %}
 <h1>Profile</h1>
 <h2>
-    {% if user.username %}
-    </br>
+    {% if user_id == 0 %}
+    <p>Please <a href = "/login/">login</a> to view your profile.</p>
+    {% endif %}
+    {% for user in users %}
+    {% if user.id == user_id %}
+    {% load static %}<img src = "{% static 'pipeline/profile_pic.png' %}" alt = "Profile Picture" width = "70px">
     <p>Name: {{ user.first_name | capfirst }} {{ user.last_name | capfirst }}</p>
     <p>E-mail: {{ user.email }}</p>
     <p>Date Joined: {{ user.date_joined }}</p>
-    <p>Last login: {{ user.last_login }}.</p>
-    {% else %}
-    <p>Please <a href = "/login/">login</a> to view your profile.</p>
-    {% endif %}
+    <p>Last login: {{ user.last_login }}</p>
+    <ul>      
+	{% for post in posts %}               
+	<li><a href = "/post/{{post.id}}/0">"{{ post.message }}"</a> - {{ post.user.username | capfirst }} {% if post.post_date.date == current_date.date %}(Today, {{ post.post_date.time }}){% else %}({{ post.post_date.date }}){% endif %} [{{ post.votes }}]</li>
+<form action="/post/{{post.id}}/1" method="get">
+	<input type="submit" value="Upvote">
+</form>
+<form action="/post/{{post.id}}/2" method="get">
+	<input type="submit" value="Downvote">
+</form>
+</br>             
+{% endfor %}          
+</ul>
 </h2>
 </br>
+{% endif %}
+{% endfor %}  
+
 {% endblock %}

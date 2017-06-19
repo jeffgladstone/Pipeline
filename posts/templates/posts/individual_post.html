@@ -6,7 +6,7 @@
 <ul>
 	{% for post in posts %}
 	{% if post.id == postid %}
-	<li>"{{ post.message }}" - {{ post.user.username | capfirst }} ({{ post.post_date }}) [{{ post.votes }}]</li>
+	<li>"{{ post.message }}" - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> ({{ post.post_date }}) [{{ post.votes }}]</li>
 	</br>
 	{% endif %}
 {% endfor %}
