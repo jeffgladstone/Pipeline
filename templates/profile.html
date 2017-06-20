@@ -4,7 +4,7 @@
 <h1>Profile</h1>
 <h2>
     {% if user_id == 0 %}
-    <p>Please <a href = "/login/">login</a> to view your profile.</p>
+    <p>Please <a href = "/login/">login</a> or <a href = "/signup/">sign up</a> to view your profile.</p>
     {% endif %}
     {% for user in users %}
     {% if user.id == user_id %}
@@ -13,6 +13,8 @@
     <p>E-mail: {{ user.email }}</p>
     <p>Date Joined: {{ user.date_joined }}</p>
     <p>Last login: {{ user.last_login }}</p>
+    </h2>
+    <p>
     <ul>      
 	{% for post in posts %}               
 	<li><a href = "/post/{{post.id}}/0">"{{ post.message }}"</a> - {{ post.user.username | capfirst }} {% if post.post_date.date == current_date.date %}(Today, {{ post.post_date.time }}){% else %}({{ post.post_date.date }}){% endif %} [{{ post.votes }}]</li>
@@ -25,7 +27,7 @@
 </br>             
 {% endfor %}          
 </ul>
-</h2>
+</p>
 </br>
 {% endif %}
 {% endfor %}  

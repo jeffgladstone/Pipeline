@@ -1,12 +1,7 @@
 Goals:
-- Fix all url errors
-- Sign up page for making an account
-- Sort posts by Top/Hottest (drop down menu)
-- Next 30 on bottom of homepage
+- Browse by groups of 30 (use Reddit's system for example)
 - Make votes a dictioary with user:1 or -1. integer represents upvote or downvote
 - Profile pic -- extra User field
-
-
 
 
 

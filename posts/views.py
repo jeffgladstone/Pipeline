@@ -1,12 +1,12 @@
 # \posts\views.py
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from posts.models import Post
 import datetime
 from django.contrib.auth.models import User
 
-from pipeline.views import sort_posts_recent
+from pipeline.views import sort_posts_recent, sort_posts_popular, sort_posts_unpopular
 
 def search(request):
     '''sets "q" equal to a user-inputted String literal which is then used to search database for posts and users'''
@@ -56,8 +56,11 @@ def delete_todays_post(request):
 
 def individual_post(request, postid, vote):
     '''acts a profile for an individual post, displaying username, date/time, and votes'''
-
-    postid = int(postid)
+    
+    try:
+        postid = int(postid)
+    except ValueError:
+        raise Http404()
     vote = int(vote)
     posts = sort_posts_recent(Post.objects.all())
     if vote == 1:
@@ -72,4 +75,19 @@ def individual_post(request, postid, vote):
                 post.save()
 
     return render(request, 'posts/individual_post.html', {'postid': postid, 'posts': posts})
+
+def browse(request, postfilter):
+    '''browses through posts with various filters'''
+    
+    now = datetime.datetime.now()
+    unsorted_posts = Post.objects.all()
+    if (postfilter == 'new'):
+        sorted_posts = sort_posts_recent(unsorted_posts)
+    elif (postfilter == 'trending'):
+        sorted_posts = sort_posts_popular(unsorted_posts)
+    elif (postfilter == 'worst'):
+        sorted_posts = sort_posts_unpopular(unsorted_posts)
+
+    return render(request, 'posts/browse.html', {'posts': sorted_posts, 'current_date': now})
+
 

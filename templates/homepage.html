@@ -3,23 +3,29 @@
 {% block content %}
 <p><i>Welcome {{ first_name | capfirst }}. It is now {{ current_date }}</i></p>
 {% load static %}
-<a href = "addpost"><img src = "{% static 'pipeline/add_post.png' %}" alt = "Add Post" width = "130px" ></a>
+<a href = "addpost"><img src = "{% static 'pipeline/add_post.png' %}" alt = "Add Post" width = "130px" ></a> 
+<a href = "browse/new"><img src = "{% static 'pipeline/browse.png' %}" alt = "Browse" width = "100px" ></a> &nbsp;
 <a href = "search"><img src = "{% static 'pipeline/search_term.png' %}" alt = "Search" width = "100px" ></a> &nbsp;
 {% if user.username %}
 <a href = "profile/{{request.user.id}}"><img src = "{% static 'pipeline/profile.png' %}" alt = "Profile" width = "95px" ></a> &nbsp;
 {% else %}
 <a href = "profile/0"><img src = "{% static 'pipeline/profile.png' %}" alt = "Profile" width = "95px" ></a> &nbsp;
 {% endif %}
+<a href = "about"><img src = "{% static 'pipeline/about.png' %}" alt = "About" width = "85px" ></a> &nbsp;&nbsp;
 {% if username == 'guest' %}
-<a href = "login"><img src = "{% static 'pipeline/login.png' %}" alt = "Login" width = "80px" ></a> &nbsp;
+<a href = "login"><img src = "{% static 'pipeline/login.png' %}" alt = "Login" width = "85px" ></a> &nbsp;
+<a href = "signup"><img src = "{% static 'pipeline/signup.png' %}" alt = "Sign Up" width = "105px" ></a> &nbsp;
 {% endif %}
 {% if username != 'guest' %}
 <a href = "logout"><img src = "{% static 'pipeline/logout.png' %}" alt = "Logout" width = "95px" ></a> &nbsp;
 {% endif %}
-<a href = "about"><img src = "{% static 'pipeline/about.png' %}" alt = "About" width = "85px" ></a> &nbsp;&nbsp;&nbsp;
 </br>
-<a href = "delete">Delete today's posts?</a>
-</br>
+<h2>Pipeline News</h2>
+<ul>Version 1.2:
+    </br></br>
+    <li>Updated browse filters</li>
+    <li>Minor bug fixes</li>
+</ul>
 <h2>What's new?</h2>
 <ul>               
 	{% for post in posts %}               
@@ -32,5 +38,6 @@
 </form>
 </br>             
 {% endfor %}           
-</ul>     
+</ul>
+<a href = "delete">Delete today's posts?</a>     
 {% endblock %}

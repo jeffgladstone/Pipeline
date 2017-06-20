@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from pipeline.views import homepage, profile, success, about
+from pipeline.views import homepage, profile, success, about, signup
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^profile/(?P<user_id>\d{1,3})/$', profile),
     url(r'^success/$', success), #hasn't been used yet
     url(r'^about/$', about),
+    url(r'^signup/$', signup, name='signup'),
     url(r'^', include('posts.urls')),
 ]

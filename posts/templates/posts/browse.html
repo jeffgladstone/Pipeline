@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Browse Posts{% endblock %}
+{% block content %}
+
+<h2>Browse posts:</h2>
+<select onchange="if (this.value) window.location.href=this.value">
+    <option value="" selected="selected">Choose Filter:</option>
+    <option value="/browse/new">New</option>
+    <option value="/browse/trending">Trending</option>
+    <option value="/browse/worst">Worst</option>
+</select>
+<ul>               
+	{% for post in posts %}               
+	<li><a href = "/post/{{post.id}}/0">"{{ post.message }}"</a> - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> {% if post.post_date.date == current_date.date %}(Today, {{ post.post_date.time }}){% else %}({{ post.post_date.date }}){% endif %} [{{ post.votes }}]</li>
+<form action="/post/{{post.id}}/1" method="get">
+	<input type="submit" value="Upvote">
+</form>
+<form action="/post/{{post.id}}/2" method="get">
+	<input type="submit" value="Downvote">
+</form>
+</br>             
+{% endfor %}           
+</ul>     
+{% endblock %}
