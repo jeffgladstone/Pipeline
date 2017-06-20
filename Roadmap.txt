@@ -2,7 +2,7 @@ Goals:
 - Browse by groups of 30 (use Reddit's system for example)
 - Make votes a dictioary with user:1 or -1. integer represents upvote or downvote
 - Profile pic -- extra User field
-
+- Update external user info (bio, propic, etc...)
 
 
 Notes:

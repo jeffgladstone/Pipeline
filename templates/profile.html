@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Pipeline Profile{% endblock %}
 {% block content %}
-<h1>Profile</h1>
+<h1>{{ user.username }}</h1>
 <h2>
     {% if user_id == 0 %}
     <p>Please <a href = "/login/">login</a> or <a href = "/signup/">sign up</a> to view your profile.</p>
@@ -11,8 +11,8 @@
     {% load static %}<img src = "{% static 'pipeline/profile_pic.png' %}" alt = "Profile Picture" width = "70px">
     <p>Name: {{ user.first_name | capfirst }} {{ user.last_name | capfirst }}</p>
     <p>E-mail: {{ user.email }}</p>
+    {% if user.profile.bio %}<p>Bio: {{ user.profile.bio }}</p>{% endif %}
     <p>Date Joined: {{ user.date_joined }}</p>
-    <p>Last login: {{ user.last_login }}</p>
     </h2>
     <p>
     <ul>      
@@ -31,5 +31,5 @@
 </br>
 {% endif %}
 {% endfor %}  
-
+<a href = "/../../profile/{{ user.id }}/update">Update profile?</a>  <!-- make so only on your profile -->
 {% endblock %}

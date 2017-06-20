@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Profile
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('message', 'post_date', 'user', 'votes')
@@ -10,7 +10,16 @@ class PostAdmin(admin.ModelAdmin):
     fields = ('message', 'post_date', 'user', 'votes')
     raw_id_fields = ('user',)
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'bio')
+    search_fields = ('bio',)
+    list_filter = ('user',)
+    fields = ('user', 'bio')
+    raw_id_fields = ('user',)
+
 
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Profile, ProfileAdmin)
+
 

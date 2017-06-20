@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.14']
 # Application definition
 
 INSTALLED_APPS = [
-    'posts.apps.PostsConfig',
+    'posts.apps.PostsConfig', #added
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

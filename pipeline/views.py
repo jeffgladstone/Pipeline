@@ -5,7 +5,7 @@ from posts.models import Post
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 #from django.contrib.auth.forms import UserCreationForm
-from pipeline.forms import RegisterForm
+from pipeline.forms import RegisterForm, UserForm, ProfileForm, UpdateProfile
 
 def sort_posts_recent(posts_data):
     '''sorts list of posts in order by date created'''
@@ -96,3 +96,19 @@ def signup(request):
     else:
         form = RegisterForm()
     return render(request, 'signup.html', {'form': form})
+
+def update_profile(request, user_id):
+    '''updates main user fields(e-mail, first_name, last_name)'''
+
+    args = {}
+
+    if request.method == 'POST':
+        form = UpdateProfile(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return render(request, 'success.html')
+    else:
+        form = UpdateProfile()
+
+    args['form'] = form
+    return render(request, 'update_profile.html', args)
