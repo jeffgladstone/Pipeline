@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<head>
+  <link rel="stylesheet" href="avatars.css">
+</head>
+{% block title %}Update Pic{% endblock %}
+{% block content %}
+  <h2>Update Profile Picture</h2>
+   {% load static %}
+  <a href = "/../profile/{{ user.id }}/update/avatar/no_avatar"><img src = "{% static 'avatars/no_avatar.png' %}" alt = "Avatar" width = "70px"></a>
+  <a href = "/../profile/{{ user.id }}/update/avatar/avatar1"><img src = "{% static 'avatars/avatar1.png' %}" alt = "Avatar 1" width = "80px"></a>
+  <a href = "/../profile/{{ user.id }}/update/avatar/avatar2"><img src = "{% static 'avatars/avatar2.png' %}" alt = "Avatar 2" width = "80px"></a>
+  <a href = "/../profile/{{ user.id }}/update/avatar/avatar3"><img src = "{% static 'avatars/avatar3.png' %}" alt = "Avatar 3" width = "80px"></a>
+  <a href = "/../profile/{{ user.id }}/update/avatar/avatar4"><img src = "{% static 'avatars/avatar4.png' %}" alt = "Avatar 4" width = "80px"></a>
+
+
+  <!-- <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+  </form> -->
+{% endblock %}

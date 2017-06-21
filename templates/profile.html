@@ -1,14 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Pipeline Profile{% endblock %}
 {% block content %}
-<h1>{{ user.username }}</h1>
+{% load static %}
+<h1>{% for user in users %}{% if user.id == user_id %}{{ user.username }}{% endif %}{% endfor %}</h1>  <!--Displays's User's username -->
 <h2>
     {% if user_id == 0 %}
     <p>Please <a href = "/login/">login</a> or <a href = "/signup/">sign up</a> to view your profile.</p>
     {% endif %}
     {% for user in users %}
     {% if user.id == user_id %}
-    {% load static %}<img src = "{% static 'pipeline/profile_pic.png' %}" alt = "Profile Picture" width = "70px">
+    {% if not user.profile.avatar %}
+    <img src = "{% static 'avatars/no_avatar.png' %}" alt = "Avatar" width = "70px">
+    {% else %}
+        {% if user.profile.avatar == 'no_avatar' %}<img src = "{% static 'avatars/no_avatar.png' %}" alt = "No Avatar" width = "70px">
+        {% elif user.profile.avatar == 'avatar1' %}<img src = "{% static 'avatars/avatar1.png' %}" alt = "Avatar 1" width = "80px">
+        {% elif user.profile.avatar == 'avatar2' %}<img src = "{% static 'avatars/avatar2.png' %}" alt = "Avatar 2" width = "80px">
+        {% elif user.profile.avatar == 'avatar3' %}<img src = "{% static 'avatars/avatar3.png' %}" alt = "Avatar 3" width = "80px">
+        {% elif user.profile.avatar == 'avatar4' %}<img src = "{% static 'avatars/avatar4.png' %}" alt = "Avatar 4" width = "80px">{% endif %}
+    {% endif %}
     <p>Name: {{ user.first_name | capfirst }} {{ user.last_name | capfirst }}</p>
     <p>E-mail: {{ user.email }}</p>
     {% if user.profile.bio %}<p>Bio: {{ user.profile.bio }}</p>{% endif %}
@@ -29,7 +38,9 @@
 </ul>
 </p>
 </br>
+<a href = "/../../profile/{{ user.id }}/update/main">Update Name and E-mail?</a></br>  <!-- make so only on your profile -->
+<a href = "/../../profile/{{ user.id }}/update/bio">Update Bio?</a></br>  <!-- make so only on your profile -->
+<a href = "/../../profile/{{ user.id }}/update/avatar">Update Avatar?</a>  <!-- make so only on your profile -->
 {% endif %}
-{% endfor %}  
-<a href = "/../../profile/{{ user.id }}/update">Update profile?</a>  <!-- make so only on your profile -->
+{% endfor %} 
 {% endblock %}

@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 import datetime
-from posts.models import Post
+from posts.models import Post, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 #from django.contrib.auth.forms import UserCreationForm
-from pipeline.forms import RegisterForm, UserForm, ProfileForm, UpdateProfile
+from pipeline.forms import RegisterForm, UserForm, ProfileForm, UpdateUser, UpdateBio, UpdateAvatar
 
 def sort_posts_recent(posts_data):
     '''sorts list of posts in order by date created'''
@@ -97,18 +97,63 @@ def signup(request):
         form = RegisterForm()
     return render(request, 'signup.html', {'form': form})
 
-def update_profile(request, user_id):
-    '''updates main user fields(e-mail, first_name, last_name)'''
+def update_user(request, user_id):
+    '''updates main user fields (e-mail, first_name, last_name)'''
 
     args = {}
 
     if request.method == 'POST':
-        form = UpdateProfile(request.POST, instance=request.user)
+        form = UpdateUser(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return render(request, 'success.html')
     else:
-        form = UpdateProfile()
+        form = UpdateUser()
 
     args['form'] = form
-    return render(request, 'update_profile.html', args)
+    return render(request, 'update_user.html', args)
+
+def update_bio(request, user_id):
+    '''updates user's bio'''
+
+    args = {}
+
+    if request.method == 'POST':
+        form = UpdateBio(request.POST, instance=request.user)
+        if form.is_valid():
+            user = User.objects.get(pk=user_id)
+            user.profile.bio = form.cleaned_data['bio']
+            user.save()
+            return render(request, 'success.html')
+    else:
+        form = UpdateBio()
+
+    args['form'] = form
+    return render(request, 'update_bio.html', args)
+
+def update_avatar(request, user_id):
+    '''updates user's avatar (step 1)'''
+
+    args = {}
+
+    if request.method == 'POST':
+        form = UpdateAvatar(request.POST, instance=request.user)
+        if form.is_valid():
+            user = User.objects.get(pk=user_id)
+            user.profile.avatar = form.cleaned_data['avatar']
+            user.save()
+            return render(request, 'success.html')
+    else:
+        form = UpdateAvatar()
+
+    args['form'] = form
+    return render(request, 'update_avatar.html', args)
+
+def pick_avatar(request, user_id, avatar_id):
+    '''picks avatar from several choices (step 2)'''
+
+    user = User.objects.get(pk=user_id)
+    user.profile.avatar = avatar_id
+    user.save()
+    return render(request, '../templates/success.html')
+    

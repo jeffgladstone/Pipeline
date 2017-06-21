@@ -11,10 +11,10 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'bio')
+    list_display = ('user', 'bio', 'avatar')
     search_fields = ('bio',)
     list_filter = ('user',)
-    fields = ('user', 'bio')
+    fields = ('user', 'bio', 'avatar')
     raw_id_fields = ('user',)
 
 

@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from pipeline.views import homepage, profile, success, about, signup, update_profile
+from pipeline.views import homepage, profile, success, about, signup, update_user, update_bio, update_avatar, pick_avatar
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,7 +25,10 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'), #{'next_page': '/'} redirects home
     url(r'^$', homepage),
     url(r'^profile/(?P<user_id>\d{1,3})/$', profile),
-    url(r'^profile/(?P<user_id>\d{1,3})/update/$', update_profile),
+    url(r'^profile/(?P<user_id>\d{1,3})/update/main/$', update_user),
+    url(r'^profile/(?P<user_id>\d{1,3})/update/bio/$', update_bio),
+    url(r'^profile/(?P<user_id>\d{1,3})/update/avatar/$', update_avatar),
+    url(r'^profile/(?P<user_id>\d{1,3})/update/avatar/(?P<avatar_id>.+)/$', pick_avatar),
     url(r'^success/$', success), #hasn't been used yet
     url(r'^about/$', about),
     url(r'^signup/$', signup, name='signup'),
