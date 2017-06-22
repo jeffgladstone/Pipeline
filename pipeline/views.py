@@ -5,7 +5,7 @@ from posts.models import Post, Profile
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 #from django.contrib.auth.forms import UserCreationForm
-from pipeline.forms import RegisterForm, UserForm, ProfileForm, UpdateUser, UpdateBio, UpdateAvatar
+from pipeline.forms import RegisterForm, UserForm, ProfileForm, UpdateName, UpdateEmail, UpdateBio, UpdateAvatar
 
 def sort_posts_recent(posts_data):
     '''sorts list of posts in order by date created'''
@@ -97,21 +97,37 @@ def signup(request):
         form = RegisterForm()
     return render(request, 'signup.html', {'form': form})
 
-def update_user(request, user_id):
-    '''updates main user fields (e-mail, first_name, last_name)'''
+def update_name(request, user_id):
+    '''updates user's first and last name'''
 
     args = {}
 
     if request.method == 'POST':
-        form = UpdateUser(request.POST, instance=request.user)
+        form = UpdateName(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             return render(request, 'success.html')
     else:
-        form = UpdateUser()
+        form = UpdateName()
 
     args['form'] = form
-    return render(request, 'update_user.html', args)
+    return render(request, 'update_name.html', args)
+
+def update_email(request, user_id):
+    '''updates user's email'''
+
+    args = {}
+
+    if request.method == 'POST':
+        form = UpdateEmail(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return render(request, 'success.html')
+    else:
+        form = UpdateEmail()
+
+    args['form'] = form
+    return render(request, 'update_email.html', args)
 
 def update_bio(request, user_id):
     '''updates user's bio'''

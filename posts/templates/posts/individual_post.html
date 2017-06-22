@@ -8,6 +8,12 @@
 	{% if post.id == postid %}
 	<li>"{{ post.message }}" - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> ({{ post.post_date }}) [{{ post.votes }}]</li>
 	</br>
+	<form action="/post/{{post.id}}/1" method="get">
+	<input type="submit" value="Upvote">
+    </form>
+    <form action="/post/{{post.id}}/2" method="get">
+	<input type="submit" value="Downvote">
+    </form>
 	{% endif %}
 {% endfor %}
 </ul>

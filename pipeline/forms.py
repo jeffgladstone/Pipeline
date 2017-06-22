@@ -32,22 +32,28 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ('bio',)
 
-class UpdateUser(forms.ModelForm):
-    email = forms.EmailField(required=True)
+class UpdateName(forms.ModelForm):
     first_name = forms.CharField(required=True)
     last_name = forms.CharField(required= True)
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name')
+        fields = ('first_name', 'last_name')
 
-    #def clean_email(self):
-        #username = self.cleaned_data.get('username')
-        #email = self.cleaned_data.get('email')
+class UpdateEmail(forms.ModelForm):
+    email = forms.EmailField(required=True)
 
-        #if email and User.objects.filter(email=email).exclude(username=username).count():
-            #raise forms.ValidationError('This email address is already in use. Please supply a different email address.')
-        #return email
+    class Meta:
+        model = User
+        fields = ('email',)
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+
+        if email and User.objects.filter(email=email).exclude(username=username).count():
+            raise forms.ValidationError('This email address is already in use. Please supply a different email address.')
+        return email
 
 class UpdateBio(forms.ModelForm):
     bio = forms.CharField(widget=forms.Textarea, required=True)

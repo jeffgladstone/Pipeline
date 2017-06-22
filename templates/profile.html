@@ -9,15 +9,17 @@
     {% endif %}
     {% for user in users %}
     {% if user.id == user_id %}
-    {% if not user.profile.avatar %}
-    <img src = "{% static 'avatars/no_avatar.png' %}" alt = "Avatar" width = "70px">
-    {% else %}
         {% if user.profile.avatar == 'no_avatar' %}<img src = "{% static 'avatars/no_avatar.png' %}" alt = "No Avatar" width = "70px">
         {% elif user.profile.avatar == 'avatar1' %}<img src = "{% static 'avatars/avatar1.png' %}" alt = "Avatar 1" width = "80px">
         {% elif user.profile.avatar == 'avatar2' %}<img src = "{% static 'avatars/avatar2.png' %}" alt = "Avatar 2" width = "80px">
         {% elif user.profile.avatar == 'avatar3' %}<img src = "{% static 'avatars/avatar3.png' %}" alt = "Avatar 3" width = "80px">
-        {% elif user.profile.avatar == 'avatar4' %}<img src = "{% static 'avatars/avatar4.png' %}" alt = "Avatar 4" width = "80px">{% endif %}
-    {% endif %}
+        {% elif user.profile.avatar == 'avatar4' %}<img src = "{% static 'avatars/avatar4.png' %}" alt = "Avatar 4" width = "80px">
+        {% elif user.profile.avatar == 'avatar5' %}<img src = "{% static 'avatars/avatar5.png' %}" alt = "Avatar 5" width = "80px">
+        {% elif user.profile.avatar == 'avatar6' %}<img src = "{% static 'avatars/avatar6.png' %}" alt = "Avatar 6" width = "80px">
+        {% elif user.profile.avatar == 'avatar7' %}<img src = "{% static 'avatars/avatar7.png' %}" alt = "Avatar 7" width = "80px">
+        {% elif user.profile.avatar == 'avatar8' %}<img src = "{% static 'avatars/avatar8.png' %}" alt = "Avatar 8" width = "80px">
+        {% elif user.profile.avatar == 'avatar9' %}<img src = "{% static 'avatars/avatar9.png' %}" alt = "Avatar 9" width = "80px">
+        {% elif user.profile.avatar == 'avatar10' %}<img src = "{% static 'avatars/avatar10.png' %}" alt = "Avatar 10" width = "80px">{% endif %}
     <p>Name: {{ user.first_name | capfirst }} {{ user.last_name | capfirst }}</p>
     <p>E-mail: {{ user.email }}</p>
     {% if user.profile.bio %}<p>Bio: {{ user.profile.bio }}</p>{% endif %}
@@ -38,9 +40,12 @@
 </ul>
 </p>
 </br>
-<a href = "/../../profile/{{ user.id }}/update/main">Update Name and E-mail?</a></br>  <!-- make so only on your profile -->
+{% endif %}
+{% endfor %}
+{% if you.id == user_id %}
+<a href = "/../../profile/{{ user.id }}/update/name">Update Name?</a></br>  <!-- make so only on your profile -->
+<a href = "/../../profile/{{ user.id }}/update/email">Update Email?</a></br>  <!-- make so only on your profile -->
 <a href = "/../../profile/{{ user.id }}/update/bio">Update Bio?</a></br>  <!-- make so only on your profile -->
 <a href = "/../../profile/{{ user.id }}/update/avatar">Update Avatar?</a>  <!-- make so only on your profile -->
 {% endif %}
-{% endfor %} 
 {% endblock %}
