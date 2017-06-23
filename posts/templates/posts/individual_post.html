@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 {% block title %}Post Page{% endblock %}
 {% block content %}
-
+{% load static %}
 <h2>Individual post:</h2>
 <ul>
 	{% for post in posts %}
 	{% if post.id == postid %}
-	<li>"{{ post.message }}" - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> ({{ post.post_date }}) [{{ post.votes }}]</li>
+	<li>"{{ post.message }}" - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> ({{ post.post_date }}) [{{ post.votes }}]
 	</br>
+
+        {% if post.user.profile.avatar == 'no_avatar' %}<img src = "{% static 'avatars/no_avatar.png' %}" alt = "No Avatar" width = "70px">
+        {% elif post.user.profile.avatar == 'avatar1' %}<img src = "{% static 'avatars/avatar1.png' %}" alt = "Avatar 1" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar2' %}<img src = "{% static 'avatars/avatar2.png' %}" alt = "Avatar 2" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar3' %}<img src = "{% static 'avatars/avatar3.png' %}" alt = "Avatar 3" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar4' %}<img src = "{% static 'avatars/avatar4.png' %}" alt = "Avatar 4" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar5' %}<img src = "{% static 'avatars/avatar5.png' %}" alt = "Avatar 5" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar6' %}<img src = "{% static 'avatars/avatar6.png' %}" alt = "Avatar 6" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar7' %}<img src = "{% static 'avatars/avatar7.png' %}" alt = "Avatar 7" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar8' %}<img src = "{% static 'avatars/avatar8.png' %}" alt = "Avatar 8" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar9' %}<img src = "{% static 'avatars/avatar9.png' %}" alt = "Avatar 9" width = "80px">
+        {% elif post.user.profile.avatar == 'avatar10' %}<img src = "{% static 'avatars/avatar10.png' %}" alt = "Avatar 10" width = "80px">{% endif %}</li>
+	
 	<form action="/post/{{post.id}}/1" method="get">
 	<input type="submit" value="Upvote">
     </form>

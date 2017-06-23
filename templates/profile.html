@@ -2,7 +2,7 @@
 {% block title %}Pipeline Profile{% endblock %}
 {% block content %}
 {% load static %}
-<h1>{% for user in users %}{% if user.id == user_id %}{{ user.username }}{% endif %}{% endfor %}</h1>  <!--Displays's User's username -->
+<h1><i>{% for user in users %}{% if user.id == user_id %}{{ user.username }}{% endif %}{% endfor %}</i></h1>  <!--Displays's User's username -->
 <h2>
     {% if user_id == 0 %}
     <p>Please <a href = "/login/">login</a> or <a href = "/signup/">sign up</a> to view your profile.</p>

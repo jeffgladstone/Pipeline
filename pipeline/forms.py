@@ -5,8 +5,8 @@ from posts.models import Profile
 from django.core.files.images import get_image_dimensions
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(label = "Email")
-    fullname = forms.CharField(label = "Full name")
+    email = forms.EmailField(label = "E-mail")
+    fullname = forms.CharField(label = "Full name (first and last)")
 
     class Meta:
         model = User

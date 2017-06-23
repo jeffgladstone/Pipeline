@@ -6,3 +6,5 @@ Goals:
 
 Notes:
 - Use 127.0.0.1:8000 for only this computer, but 192.168.1.14:8000 for other computers to connect (could change)
+- When adding new avatars, update both profile.html and individual_post.html
+- When uploading to GitHub, change version on homepage.html and about.html
