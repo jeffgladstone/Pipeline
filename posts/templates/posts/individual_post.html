@@ -6,7 +6,7 @@
 <ul>
 	{% for post in posts %}
 	{% if post.id == postid %}
-	<li>"{{ post.message }}" - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> ({{ post.post_date }}) [{{ post.votes }}]
+	<li>"{{ post.message }}" - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> ({{ post.post_date }}) &nbsp; [{{ post.votes }}]</li>
 	</br>
 
         {% if post.user.profile.avatar == 'no_avatar' %}<img src = "{% static 'avatars/no_avatar.png' %}" alt = "No Avatar" width = "70px">
@@ -21,13 +21,15 @@
         {% elif post.user.profile.avatar == 'avatar9' %}<img src = "{% static 'avatars/avatar9.png' %}" alt = "Avatar 9" width = "80px">
         {% elif post.user.profile.avatar == 'avatar10' %}<img src = "{% static 'avatars/avatar10.png' %}" alt = "Avatar 10" width = "80px">{% endif %}</li>
 	
-	<form action="/post/{{post.id}}/1" method="get">
-	<input type="submit" value="Upvote">
-    </form>
-    <form action="/post/{{post.id}}/2" method="get">
-	<input type="submit" value="Downvote">
-    </form>
+	<form action="/post/{{post.id}}" method="get">
+    <input type="submit" name = "q" value="Upvote"></form>
+    <form action="/post/{{post.id}}" method="get">
+    <input type="submit" name = "q" value="Downvote"></form>
+    {% if request.user.id == post.user.id %}
+    <form action="/post/{{post.id}}" method="get">
+    <input type="submit" name = "q" value="Delete" onclick="return confirm('Are you sure?')"></form>
 	{% endif %}
+    {% endif %}
 {% endfor %}
 </ul>
 {% endblock %}

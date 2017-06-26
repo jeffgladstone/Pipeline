@@ -11,7 +11,7 @@
 <p>{{ posts|length }} post{{ posts|pluralize }} found:</p>
 <ul>               
     {% for post in posts %}               
-	<li><a href = "/post/{{post.id}}/0">"{{ post.message }}"</a> - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> {% if post.post_date.date == current_date.date %}(Today, {{ post.post_date.time }}){% else %}({{ post.post_date.date }}){% endif %} [{{ post.votes }}]</li>
+	<li><a href = "/post/{{post.id}}">"{{ post.message }}"</a> - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> {% if post.post_date.date == current_date.date %}(Today, {{ post.post_date.time }}){% else %}({{ post.post_date.date }}){% endif %} &nbsp; [{{ post.votes }}]</li>
     {% endfor %}           
 </ul>       
 {% else %}

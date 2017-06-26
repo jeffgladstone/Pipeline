@@ -1,6 +1,6 @@
 # \posts\views.py
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from posts.models import Post
 import datetime
@@ -42,9 +42,9 @@ def add_post(request):
                 user = request.user,
                 votes = 0
             )
-            unsorted_posts = Post.objects.all()
-            sorted_posts = sort_posts_recent(unsorted_posts)
-            return render(request, '../templates/success.html', {'current_date': now, 'posts': sorted_posts, 'user': request.user})
+            #unsorted_posts = Post.objects.all()
+            #sorted_posts = sort_posts_recent(unsorted_posts)
+            return redirect('/')
     return render(request, 'posts/add_post.html', {'errors': errors})
 
 def delete_todays_post(request):
@@ -54,27 +54,37 @@ def delete_todays_post(request):
     Post.objects.filter(post_date__contains = now).delete()
     return render(request, '../templates/success.html',)
 
-def individual_post(request, postid, vote):
+def individual_post(request, postid):
     '''acts a profile for an individual post, displaying username, date/time, and votes'''
     
     try:
         postid = int(postid)
     except ValueError:
         raise Http404()
-    vote = int(vote)
     posts = sort_posts_recent(Post.objects.all())
-    if vote == 1:
-        for post in posts:
-            if (post.id == postid):
-                post.votes += 1
-                post.save()
-    if vote == 2:
-        for post in posts:
-            if (post.id == postid):
-                post.votes -= 1
-                post.save()
+    kwargs = {"posts": posts, 'postid': postid}
+    if 'q' in request.GET:
+        q = request.GET['q']
+        if (q == 'Upvote'):
+            for post in posts:
+                if (post.id == postid):
+                    post.votes += 1
+                    post.save()
+            return redirect('/post/' + str(postid), **kwargs)
+        elif (q == 'Downvote'):
+            for post in posts:
+                if (post.id == postid):
+                    post.votes -= 1
+                    post.save()
+            return redirect('/post/' + str(postid), )
+        elif (q == 'Delete'):
+            for post in posts:
+                if (post.id == postid):
+                    post.delete()
+            return redirect('/success/') 
 
-    return render(request, 'posts/individual_post.html', {'postid': postid, 'posts': posts})
+    return render(request, 'posts/individual_post.html', {'posts': posts, 'postid': postid})
+
 
 def browse(request, postfilter):
     '''browses through posts with various filters'''

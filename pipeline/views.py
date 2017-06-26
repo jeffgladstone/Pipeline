@@ -90,8 +90,9 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            user_id = str(user.id)
             login(request, user)
-            return render(request, 'success.html')
+            return redirect('../profile/' + user_id + '/update/avatar')
 
     else:
         form = RegisterForm()
@@ -106,7 +107,7 @@ def update_name(request, user_id):
         form = UpdateName(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return render(request, 'success.html')
+            return redirect('/profile/' + user_id)
     else:
         form = UpdateName()
 
@@ -122,7 +123,7 @@ def update_email(request, user_id):
         form = UpdateEmail(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return render(request, 'success.html')
+            return redirect('/profile/' + user_id)
     else:
         form = UpdateEmail()
 
@@ -140,7 +141,7 @@ def update_bio(request, user_id):
             user = User.objects.get(pk=user_id)
             user.profile.bio = form.cleaned_data['bio']
             user.save()
-            return render(request, 'success.html')
+            return redirect('/profile/' + user_id)
     else:
         form = UpdateBio()
 
@@ -150,20 +151,21 @@ def update_bio(request, user_id):
 def update_avatar(request, user_id):
     '''updates user's avatar (step 1)'''
 
-    args = {}
+    #args = {}
 
-    if request.method == 'POST':
-        form = UpdateAvatar(request.POST, instance=request.user)
-        if form.is_valid():
-            user = User.objects.get(pk=user_id)
-            user.profile.avatar = form.cleaned_data['avatar']
-            user.save()
-            return render(request, 'success.html')
-    else:
-        form = UpdateAvatar()
+    #if request.method == 'POST':
+        #form = UpdateAvatar(request.POST, instance=request.user)
+        #if form.is_valid():
+            #user = User.objects.get(pk=user_id)
+            #user.profile.avatar = form.cleaned_data['avatar']
+            #user.save()
+            #return redirect('/profile/' + user_id)
+    #else:
+        #form = UpdateAvatar()
 
-    args['form'] = form
-    return render(request, 'update_avatar.html', args)
+    #args['form'] = form
+    #return render(request, 'update_avatar.html', args)
+    return render(request, 'update_avatar.html')
 
 def pick_avatar(request, user_id, avatar_id):
     '''picks avatar from several choices (step 2)'''
@@ -171,5 +173,5 @@ def pick_avatar(request, user_id, avatar_id):
     user = User.objects.get(pk=user_id)
     user.profile.avatar = avatar_id
     user.save()
-    return render(request, '../templates/success.html')
+    return redirect('/profile/' + user_id)
     
