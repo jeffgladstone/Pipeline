@@ -2,8 +2,10 @@ Goals:
 - Browse by groups of 30 (use Reddit's system for example)
 - Make votes a dictioary with user:1 or -1. integer represents upvote or downvote
 - Make single HTML source for avatar display
+- Make static css file
+- is_reported field for Post model
 
-
+- on Browse page, show which filter is currently on!
 
 Notes:
 - Use 127.0.0.1:8000 for only this computer, but 192.168.1.14:8000 for other computers to connect (could change)

@@ -98,6 +98,6 @@ def browse(request, postfilter):
     elif (postfilter == 'worst'):
         sorted_posts = sort_posts_unpopular(unsorted_posts)
 
-    return render(request, 'posts/browse.html', {'posts': sorted_posts, 'current_date': now})
+    return render(request, 'posts/browse.html', {'posts': sorted_posts, 'current_date': now, 'filter': postfilter})
 
 

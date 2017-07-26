@@ -2,7 +2,7 @@
 {% block title %}Browse Posts{% endblock %}
 {% block content %}
 {% load static %}
-<h2>Browse posts:</h2>
+<h2>Browse {{filter}} posts:</h2>
 <select onchange="if (this.value) window.location.href=this.value">
     <option value="" selected="selected">Choose Filter:</option>
     <option value="/browse/new">New</option>
