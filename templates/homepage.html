@@ -4,7 +4,7 @@
 <p><i>Welcome {{ first_name | capfirst }}. It is now {{ current_date }}</i></p>
 {% load static %}
 <a href = "addpost"><img src = "{% static 'pipeline/add_post.png' %}" alt = "Add Post" width = "130px" ></a> 
-<a href = "browse/new"><img src = "{% static 'pipeline/browse.png' %}" alt = "Browse" width = "100px" ></a> &nbsp;
+<a href = "browse/new/1"><img src = "{% static 'pipeline/browse.png' %}" alt = "Browse" width = "100px" ></a> &nbsp;
 <a href = "search"><img src = "{% static 'pipeline/search_term.png' %}" alt = "Search" width = "100px" ></a> &nbsp;
 {% if user.username %}
 <a href = "profile/{{request.user.id}}"><img src = "{% static 'pipeline/profile.png' %}" alt = "Profile" width = "95px" ></a> &nbsp;
@@ -24,9 +24,13 @@
 <p>Success!!!!</p>
 {% endif %}
 <h2>Pipeline News</h2>
-<ul>Version 1.4.1:
+<ul>Version 1.4.5:
     </br></br>
-    <li>Updated Browse page</li>
+    <li>MAJOR Browse Page Update!
+        <ul><li>Added <i>Old</i> filter</li>
+        <li>New organization system makes browsing more efficient</li></ul>
+    </li>
+    <li>Other small site fixes</li>
 
 </ul>
 <h2>What's new?</h2>

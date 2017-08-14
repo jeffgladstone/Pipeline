@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from pipeline.forms import RegisterForm, UserForm, ProfileForm, UpdateName, UpdateEmail, UpdateBio, UpdateAvatar
 
 def sort_posts_recent(posts_data):
-    '''sorts list of posts in order by date created'''
+    '''sorts list of posts in order by newest'''
 
     # This line creates a list of tuples (Post Date, Post Object)
     post_tuples = [(single_post.post_date, single_post) for single_post in posts_data] 
@@ -30,13 +30,24 @@ def sort_posts_popular(posts_data):
     return sorted_posts
 
 def sort_posts_unpopular(posts_data):
-    '''sorts list of posts in order by most votes '''
+    '''sorts list of posts in order by least votes '''
 
     # This line creates a list of tuples (Post Votes, Post Object)
     post_tuples = [(single_post.votes, single_post) for single_post in posts_data] 
 
     # This line sorts (ascending) the list of tuples by votes
     sorted_posts = [item[1] for item in sorted(post_tuples, key=lambda tup: tup[0])]
+    
+    return sorted_posts
+
+def sort_posts_old(posts_data):
+    '''sorts list of posts in order by oldest '''
+
+    # This line creates a list of tuples (Post Date, Post Object)
+    post_tuples = [(single_post.post_date, single_post) for single_post in posts_data] 
+
+    # This line sorts (ascending) the list of tuples by date
+    sorted_posts = [item[1] for item in sorted(post_tuples, key=lambda tup: tup[0], reverse=False)]
     
     return sorted_posts
     

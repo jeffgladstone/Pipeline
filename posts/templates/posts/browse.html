@@ -5,10 +5,17 @@
 <h2>Browse {{filter}} posts:</h2>
 <select onchange="if (this.value) window.location.href=this.value">
     <option value="" selected="selected">Choose Filter:</option>
-    <option value="/browse/new">New</option>
-    <option value="/browse/trending">Trending</option>
-    <option value="/browse/worst">Worst</option>
+    <option value="/browse/new/1">New</option>
+    <option value="/browse/trending/1">Trending</option>
+    <option value="/browse/worst/1">Worst</option>
+    <option value="/browse/old/1">Old</option>
 </select>
+{% if page < finalpage %}
+<a href = "/browse/{{filter}}/{{nextpage}}">(next)</a>
+{% endif %}
+{% if page > 1 %}
+<a href = "/browse/{{filter}}/{{prevpage}}">(previous)</a>
+{% endif %}
 <ul>               
 	{% for post in posts %}               
 	<li><a href = "/post/{{post.id}}">"{{ post.message }}"</a> - <a href = "/profile/{{post.user.id}}">{{ post.user.username | capfirst }}</a> {% if post.post_date.date == current_date.date %}(Today, {{ post.post_date.time }}){% else %}({{ post.post_date.date }}){% endif %} &nbsp; [{{ post.votes }}]</li>
